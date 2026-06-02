@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abrorrahmatullah.vercel.app/sitemap.xml

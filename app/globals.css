@@ -76,7 +76,7 @@ body {
 
 /* Typography utilities */
 .font-display {
-  font-family: var(--font-syne), 'Syne', sans-serif;
+  font-family: var(--font-mono), 'JetBrains Mono', monospace;
 }
 
 .font-mono-custom {

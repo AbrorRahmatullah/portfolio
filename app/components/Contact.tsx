@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import { motion, useInView, type Variants } from "framer-motion";
 import { Mail, Send, CheckCircle, AlertCircle, MapPin } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./SocialIcons";
@@ -74,13 +75,27 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
-    // Simulate form submission — replace with your API endpoint
-    await new Promise((r) => setTimeout(r, 1500));
-    setStatus("success");
-    setTimeout(() => {
-      setStatus("idle");
-      setForm({ name: "", email: "", subject: "", message: "" });
-    }, 4000);
+    try {
+      await emailjs.send(
+        "service_srsq3s8",   // ganti dengan Service ID kamu
+        "template_fetlst9",  // ganti dengan Template ID kamu
+        {
+          from_name: form.name,
+          from_email: form.email,
+          subject: form.subject,
+          message: form.message,
+        },
+        "poxA7rsfXEcsRsI4l"    // ganti dengan Public Key kamu
+      );
+      setStatus("success");
+      setTimeout(() => {
+        setStatus("idle");
+        setForm({ name: "", email: "", subject: "", message: "" });
+      }, 4000);
+    } catch {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 4000);
+    }
   };
 
   const containerVariants: Variants = {

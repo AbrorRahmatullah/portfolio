@@ -24,105 +24,210 @@ type Job = {
 const experience: Job[] = [
   {
     company: "PT Sarana Multi Infrastruktur (Persero)",
-    role: "Fullstack Developer – Data Warehouse Division",
-    period: "2025 – Present",
+    role: "Full-Stack Python Developer & AI Engineer",
+    period: "Jan 2025 – Present",
     status: "current",
     description:
-      "Building internal enterprise applications for data processing, business automation, system integration, and Data Warehouse support.",
+      "State-owned infrastructure finance company — building AI-integrated backend systems in a regulated financial environment where data privacy and system reliability are non-negotiable.",
     projects: [
       {
         title: "Single Source of Truth (SSOT)",
         description:
-          "Centralised platform for company documents, regulations, and information — ensuring consistent, structured access across departments.",
+          "Centralized Flask web platform enabling multiple divisions to access and manage consistent data from a single reliable source, with Excel ingestion pipeline, Audit Trail module, and production deployment.",
         contributions: [
-          "Backend & API Development",
-          "Database Design",
-          "Data Processing",
-          "System Integration",
+          "Flask & SQLAlchemy Backend",
+          "Excel Ingestion (Pandas, openpyxl)",
+          "Audit Trail & Logging",
+          "Production Deployment (Waitress)",
         ],
-        tech: ["Python", "Flask", "SQL Server", "JavaScript"],
+        tech: ["Python", "Flask", "SQLAlchemy", "Pandas", "SQL Server", "openpyxl", "Waitress"],
         impact: [
-          "Centralised company knowledge base",
-          "Eliminated document duplication",
-          "Improved cross-team information access",
+          "Eliminated data fragmentation across divisions",
+          "Full traceability via audit trail",
+          "Robust production deployment with error handling",
         ],
       },
       {
-        title: "iDEB SLIK Reader",
+        title: "iDeb SLIK Credit Report Pipeline",
         description:
-          "Automated system for parsing and processing iDEB SLIK credit bureau files, dramatically reducing manual data entry and analysis time.",
+          "High-throughput async pipeline handling large Base64-encoded credit report file uploads — decoupling upload from processing using asyncio, queue.Queue, and threading to eliminate main-thread blocking.",
         contributions: [
-          "File & Data Processing",
-          "Pandas Data Pipeline",
-          "Background Job Processing",
-          "Database Integration",
+          "Async Pipeline Architecture",
+          "Base64 File Processing",
+          "Pandas Data Transformation",
+          "Concurrent Job Queue",
         ],
-        tech: ["Python", "Flask", "Pandas", "SQL Server"],
+        tech: ["Python", "Flask", "asyncio", "queue.Queue", "Pandas", "SQL Server"],
         impact: [
-          "Reduced manual processing by ~80%",
-          "Improved data accuracy",
-          "Faster debtor analysis cycles",
+          "Eliminated main-thread blocking",
+          "Concurrent multi-file handling",
+          "Reduced processing latency significantly",
         ],
       },
       {
-        title: "Internal AI Chatbot Exploration",
+        title: "Offline RAG Chatbot (Self-Initiated R&D)",
         description:
-          "Proof-of-concept chatbot for internal knowledge management using Local LLM and Retrieval-Augmented Generation.",
+          "Fully offline AI chatbot prototype for secure document Q&A on a government intranet — built during initial onboarding year using local LLM inference with no cloud dependency.",
         contributions: [
           "Local LLM Integration",
           "RAG Architecture",
-          "Document Retrieval",
-          "Knowledge Base Preparation",
+          "Vector Search (FAISS)",
+          "LangChain Pipeline",
         ],
-        tech: ["Flask", "Ollama", "FAISS", "HuggingFace", "DeepSeek"],
+        tech: ["Flask", "Ollama", "DeepSeek", "FAISS", "HuggingFace", "LangChain"],
         impact: [
-          "Validated Local LLM for enterprise use",
-          "Improved internal knowledge retrieval",
-          "Foundation for future AI tooling",
+          "Validated Local LLM for regulated environments",
+          "Semantic search with FAISS",
+          "Foundation for enterprise AI tooling",
+        ],
+      },
+      {
+        title: "AWS Bedrock AI Chatbot (Vendor Support)",
+        description:
+          "Supporting external vendor and in-house AI Engineer in deploying a production-grade enterprise AI chatbot powered by AWS Bedrock with RAG architecture for company-wide knowledge management.",
+        contributions: [
+          "Technical Liaison & Support",
+          "RAG Pipeline Review",
+          "Database Schema Design",
+          "Cloud Integration Support",
+        ],
+        tech: ["Next.js", "FastAPI", "AWS Bedrock", "PostgreSQL", "Amazon RDS", "LangChain"],
+        impact: [
+          "Production-grade AI chatbot deployed",
+          "Scalable RAG on AWS Bedrock",
+          "Centralized enterprise knowledge access",
+        ],
+      },
+      {
+        title: "Odoo ERP Integration",
+        description:
+          "Integrated internal financial systems with Odoo ERP via REST API, automating finance operations data sync and eliminating manual cross-system data entry for the operations team.",
+        contributions: [
+          "REST API Integration",
+          "Finance Data Automation",
+          "Cross-system Sync",
+          "Error Handling & Logging",
+        ],
+        tech: ["Python", "Flask", "Odoo API", "SQL Server", "MongoDB"],
+        impact: [
+          "Eliminated manual cross-system entry",
+          "Automated finance operations sync",
+          "Improved data consistency across platforms",
         ],
       },
     ],
   },
   {
-    company: "Puninar Logistics",
-    role: "Information Technology Developer",
-    period: "2022 – 2025",
+    company: "PT Lintas Samudera Borneo Line",
+    role: "IT Developer Officer",
+    period: "Aug 2022 – Jan 2025",
     status: "past",
     description:
-      "Developed operational applications, REST APIs, and ERP integrations to support logistics business processes.",
+      "National logistics and shipping company — owned the full software development lifecycle for internal systems across order management, ERP integration, and operations.",
     projects: [
       {
-        title: "Order Management System",
+        title: "VVIS Operations Management System (Re-engineering)",
         description:
-          "Full-featured OMS for charter vessel management, commercial orders, and logistics workflow monitoring.",
+          "Re-engineered the legacy VVIS platform into a modern Django + PostgreSQL Operations Management System, improving system reliability, query performance, and operational visibility company-wide.",
         contributions: [
-          "Fullstack Development",
-          "Database Architecture",
-          "Business Process Automation",
-          "Operational Monitoring",
+          "Legacy System Migration",
+          "Django Backend Architecture",
+          "PostgreSQL Database Design",
+          "Odoo ERP API Integration",
         ],
-        tech: ["PHP", "JavaScript", "MySQL"],
+        tech: ["Python", "Django", "PostgreSQL", "Odoo API", "REST API"],
         impact: [
-          "Streamlined charter and order workflows",
-          "Reduced operational bottlenecks",
-          "Centralised logistics data",
+          "Modernized legacy platform",
+          "Improved query performance & reliability",
+          "Automated financial data sync with ERP",
         ],
       },
       {
-        title: "Odoo Integration API",
+        title: "Order Management Application (Phase 2)",
         description:
-          "REST API layer bridging the internal logistics system with Odoo ERP, enabling real-time data synchronisation.",
+          "Developed and deployed Phase 2 of the Order Management Application, streamlining data entry workflows and improving UX for operations staff across multiple branches.",
+        contributions: [
+          "Fullstack Development",
+          "Business Process Automation",
+          "Multi-branch UX Improvement",
+          "Database Architecture",
+        ],
+        tech: ["PHP", "Laravel", "MySQL", "HTML", "CSS", "JavaScript"],
+        impact: [
+          "Streamlined order workflows across branches",
+          "Reduced data entry time for operations staff",
+          "Centralized logistics data management",
+        ],
+      },
+      {
+        title: "Odoo ERP Integration API",
+        description:
+          "Built REST APIs bridging internal logistics systems with Odoo ERP using Python, enabling automated data sync between logistics operations and finance systems.",
         contributions: [
           "API Development",
           "ERP Integration",
           "Authentication & Security",
           "Data Synchronisation",
         ],
-        tech: ["Django REST Framework", "FastAPI", "Odoo"],
+        tech: ["Python", "FastAPI", "Django REST Framework", "MySQL", "Odoo API"],
         impact: [
           "Seamless ERP data sync",
           "Reduced manual data entry",
           "Improved reporting accuracy",
+        ],
+      },
+    ],
+  },
+  {
+    company: "PT Multipolar Technology Tbk",
+    role: "Application Developer",
+    period: "Jun 2021 – Jun 2022",
+    status: "past",
+    description:
+      "Technology consulting firm — built and extended REST APIs for enterprise client systems, translating complex business requirements into implementable engineering designs.",
+    projects: [
+      {
+        title: "REST API Development for Enterprise Clients",
+        description:
+          "Developed REST APIs for new and existing client systems using Python and MongoDB, enabling integration with third-party services and internal platforms across multiple enterprise clients.",
+        contributions: [
+          "REST API Design & Development",
+          "Business Requirements Analysis",
+          "Software Specification Writing",
+          "Pre-QA Feature Testing",
+        ],
+        tech: ["Python", "FastAPI", "MongoDB", "REST API"],
+        impact: [
+          "Delivered APIs for multiple enterprise clients",
+          "Improved integration with third-party services",
+          "Reduced bugs through pre-QA testing",
+        ],
+      },
+    ],
+  },
+  {
+    company: "PT Industri Kereta Api (INKA) — Persero",
+    role: "IT Staff Intern",
+    period: "Jan 2019 – Feb 2019",
+    status: "past",
+    description:
+      "State-owned railway manufacturer — developed employee data management features for an internal HR information system.",
+    projects: [
+      {
+        title: "Employee Data Management System (APPS IT)",
+        description:
+          "Developed CRUD features for employee data management in the APPS IT information system used by HR operations, and conducted functional testing on newly developed features.",
+        contributions: [
+          "CRUD Feature Development",
+          "HR System Integration",
+          "Functional Testing",
+          "Bug Documentation",
+        ],
+        tech: ["PHP", "Laravel", "MySQL"],
+        impact: [
+          "Improved HR data management efficiency",
+          "Reduced manual data entry for HR operations",
+          "Documented test findings for dev team",
         ],
       },
     ],
@@ -176,7 +281,7 @@ export default function WorkExperience() {
               marginBottom: 56,
             }}
           >
-            4+ years across logistics, infrastructure finance, and enterprise software.
+            4+ years across fintech, logistics, technology consulting, and enterprise software.
           </p>
         </motion.div>
 

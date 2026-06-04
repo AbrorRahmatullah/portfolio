@@ -8,8 +8,7 @@ import { GithubIcon, LinkedinIcon } from "./SocialIcons";
 const roles = [
   "Fullstack Developer",
   "Backend Engineer",
-  "Junior AI Engineer",
-  "Data Solutions Builder",
+  "Junior AI Engineer"
 ];
 
 export default function Hero() {
@@ -210,8 +209,8 @@ export default function Hero() {
             fontWeight: 400,
           }}
         >
-          Building reliable enterprise applications, data solutions, and REST APIs.
-          Currently exploring AI Engineering at{" "}
+          Full-stack Python engineer with 4+ years in fintech, logistics, and enterprise systems.
+          REST APIs, async pipelines, and RAG architecture at{" "}
           <span style={{ color: "var(--fg)", fontWeight: 500 }}>
             PT Sarana Multi Infrastruktur (Persero)
           </span>

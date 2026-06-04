@@ -13,11 +13,11 @@ const stats = [
 
 const focuses = [
   { icon: Code2, label: "Backend Development", color: "var(--accent-blue)" },
-  { icon: Zap, label: "API Development", color: "var(--accent-purple)" },
+  { icon: Zap, label: "REST API Design", color: "var(--accent-purple)" },
   { icon: Database, label: "Data Engineering", color: "var(--accent-teal)" },
-  { icon: Brain, label: "AI Exploration", color: "#f472b6" },
+  { icon: Brain, label: "AI & RAG Systems", color: "#f472b6" },
   { icon: Briefcase, label: "Enterprise Apps", color: "var(--accent-blue)" },
-  { icon: Code2, label: "System Integration", color: "var(--accent-purple)" },
+  { icon: Code2, label: "ERP Integration", color: "#fb923c" },
 ];
 
 const containerVariants: Variants = {
@@ -116,10 +116,10 @@ export default function About() {
                     marginBottom: 16,
                   }}
                 >
-                  I&apos;m a Fullstack Developer with over 4 years of experience building
-                  enterprise-grade applications, scalable backend systems, and robust REST APIs.
-                  My work spans data processing pipelines, business automation, and cross-system
-                  integrations across multiple industries.
+                  Full-stack and AI engineer with 4+ years delivering production-grade Python systems
+                  across fintech, logistics, and enterprise environments. Specializes in REST API
+                  development (FastAPI, Django, Flask), multi-database architecture, and building
+                  scalable data platforms.
                 </p>
                 <p
                   style={{
@@ -129,13 +129,14 @@ export default function About() {
                     marginBottom: 16,
                   }}
                 >
-                  Currently working in the{" "}
+                  Currently at{" "}
                   <span style={{ color: "var(--fg)", fontWeight: 500 }}>
-                    Data Warehouse Division at PT Sarana Multi Infrastruktur (Persero)
-                  </span>
-                  , where I develop internal tools for data validation, ETL processes, and
-                  system centralisation. I also lead exploration projects around Local LLM and
-                  RAG-based knowledge retrieval.
+                    PT Sarana Multi Infrastruktur (Persero)
+                  </span>{" "}
+                  as Full-Stack Python Developer & AI Engineer — building a centralized data platform
+                  (SSOT), an async credit report pipeline, and supporting a production{" "}
+                  <span style={{ color: "var(--accent-purple)" }}>AWS Bedrock RAG chatbot</span>{" "}
+                  in a regulated financial environment.
                 </p>
                 <p
                   style={{
@@ -144,11 +145,10 @@ export default function About() {
                     lineHeight: 1.75,
                   }}
                 >
-                  My core stack is Python-first — Flask, Django, FastAPI — paired with SQL
-                  databases and Pandas for heavy data work. On the frontend I&apos;m comfortable with
-                  JavaScript and modern CSS. I&apos;m currently deepening my expertise in{" "}
-                  <span style={{ color: "var(--accent-purple)" }}>AI Engineering</span> and{" "}
-                  <span style={{ color: "var(--accent-teal)" }}>Odoo Development</span>.
+                  Python-first stack — Flask, FastAPI, Django, SQLAlchemy — with deep experience in
+                  async pipelines, Pandas data engineering, and Odoo ERP integrations. Also holds a{" "}
+                  <span style={{ color: "var(--accent-blue)" }}>Golang Backend certification</span>{" "}
+                  and B2 English proficiency (TOEIC 665).
                 </p>
               </motion.div>
 

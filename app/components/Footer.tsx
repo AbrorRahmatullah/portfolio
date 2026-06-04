@@ -75,7 +75,7 @@ export default function Footer() {
             {[
               { href: "https://github.com/AbrorRahmatullah", icon: GithubIcon, label: "GitHub" },
               { href: "https://www.linkedin.com/in/abrorrahmatullah/", icon: LinkedinIcon, label: "LinkedIn" },
-              { href: "mailto:abrorrahmatullah@gmail.com", icon: Mail, label: "Email" },
+              { href: "mailto:rahmatullahabror@gmail.com", icon: Mail, label: "Email" },
             ].map(({ href, icon: Icon, label }) => (
               <a
                 key={label}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
 import { Star, GitFork, GitCommitHorizontal, Code2 } from "lucide-react";
 import { GithubIcon } from "./SocialIcons";
@@ -20,14 +20,6 @@ const languages = [
   { name: "Other", percentage: 4, color: "#6b7280" },
 ];
 
-const contributionData = Array.from({ length: 52 * 7 }, (_, i) => {
-  const random = Math.random();
-  if (random > 0.75) return 3;
-  if (random > 0.55) return 2;
-  if (random > 0.38) return 1;
-  return 0;
-});
-
 const intensityColors = [
   "var(--border-strong)",
   "rgba(79,134,247,0.25)",
@@ -36,6 +28,19 @@ const intensityColors = [
 ];
 
 function ContributionGrid() {
+  const [contributionData, setContributionData] = useState<number[]>([]);
+
+  useEffect(() => {
+    const data = Array.from({ length: 52 * 7 }, () => {
+      const random = Math.random();
+      if (random > 0.75) return 3;
+      if (random > 0.55) return 2;
+      if (random > 0.38) return 1;
+      return 0;
+    });
+    setContributionData(data);
+  }, []);
+
   return (
     <div style={{ overflowX: "auto", paddingBottom: 4 }}>
       <div

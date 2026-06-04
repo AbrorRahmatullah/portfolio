@@ -33,8 +33,8 @@ const socialLinks = [
   {
     icon: Mail,
     label: "Email",
-    value: "abrorrahmatullah@gmail.com",
-    href: "mailto:abrorrahmatullah@gmail.com",
+    value: "rahmatullahabror@gmail.com",
+    href: "mailto:rahmatullahabror@gmail.com",
     color: "var(--accent-blue)",
   },
 ];

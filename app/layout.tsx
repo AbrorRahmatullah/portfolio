@@ -24,20 +24,23 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Abror Rahmatullah — Fullstack Developer",
+  title: "Abror Rahmatullah — Full-Stack Python Developer & AI Engineer",
   description:
-    "Fullstack Developer & Backend Engineer with 4+ years building enterprise applications, REST APIs, data systems, and exploring AI Engineering. Currently at PT Sarana Multi Infrastruktur (Persero).",
+    "Full-stack Python Developer & AI Engineer with 4+ years building production-grade systems across fintech, logistics, and enterprise. Specializes in REST APIs, async pipelines, RAG architecture, and ERP integrations.",
   keywords: [
-    "Fullstack Developer",
-    "Backend Developer",
-    "Python",
+    "Full-Stack Developer",
+    "Backend Engineer",
+    "AI Engineer",
+    "Python Developer",
+    "FastAPI",
     "Django",
     "Flask",
-    "FastAPI",
     "REST API",
+    "RAG",
+    "AWS Bedrock",
+    "LangChain",
     "Data Engineering",
-    "AI Engineer",
-    "Junior AI Engineer",
+    "Go Golang",
     "Abror Rahmatullah",
   ],
   authors: [

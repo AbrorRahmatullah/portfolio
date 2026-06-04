@@ -16,25 +16,22 @@ type Cert = {
 
 const certifications: Cert[] = [
   {
-    title: "Add Your Certification",
-    issuer: "Issuing Organization",
-    date: "2024",
-    category: "General",
-    placeholder: true,
+    title: "PostgreSQL for Database Developer",
+    issuer: "Native Enterprise",
+    date: "2023",
+    category: "Database"
   },
   {
-    title: "Add Your Certification",
-    issuer: "Issuing Organization",
-    date: "2024",
-    category: "General",
-    placeholder: true,
+    title: "Python (Basic)",
+    issuer: "HackerRank",
+    date: "2021",
+    category: "Backend"
   },
   {
-    title: "Add Your Certification",
-    issuer: "Issuing Organization",
-    date: "2024",
-    category: "General",
-    placeholder: true,
+    title: "Golang Backend Development",
+    issuer: "Sanbercode",
+    date: "2023",
+    category: "Backend"
   },
 ];
 

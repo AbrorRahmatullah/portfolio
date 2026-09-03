@@ -3,51 +3,66 @@
 import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./SocialIcons";
 
+const navLinks = [
+  { label: "About",      href: "#about" },
+  { label: "Skills",     href: "#skills" },
+  { label: "Experience", href: "#experience" },
+  { label: "Projects",   href: "#projects" },
+  { label: "GitHub",     href: "#github" },
+  { label: "Contact",    href: "#contact" },
+];
+
+const socials = [
+  { href: "https://github.com/AbrorRahmatullah",          icon: GithubIcon,   label: "GitHub" },
+  { href: "https://www.linkedin.com/in/abrorrahmatullah/", icon: LinkedinIcon, label: "LinkedIn" },
+  { href: "mailto:rahmatullahabror@gmail.com",             icon: Mail,         label: "Email" },
+];
+
 export default function Footer() {
   const year = new Date().getFullYear();
+
+  const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <footer
       style={{
         borderTop: "1px solid var(--border)",
         background: "var(--bg-secondary)",
-        padding: "40px 24px",
+        padding: "40px 24px 32px",
       }}
     >
-      <div
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          display: "flex",
-          flexDirection: "column",
-          gap: 24,
-        }}
-      >
-        {/* Top Row */}
+      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+        {/* Top row */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
             flexWrap: "wrap",
-            gap: 16,
+            gap: 20,
+            marginBottom: 28,
           }}
         >
-          {/* Branding */}
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          {/* Brand */}
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <div
               style={{
-                width: 30,
-                height: 30,
-                borderRadius: 7,
-                background: "linear-gradient(135deg, var(--accent-blue), var(--accent-purple))",
+                width: 36,
+                height: 36,
+                borderRadius: 9,
+                background: "var(--accent-blue)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontSize: "0.7rem",
+                fontSize: "var(--text-xs)",
                 fontWeight: 700,
                 color: "white",
                 fontFamily: "var(--font-syne), sans-serif",
+                boxShadow: "0 2px 8px rgba(212,170,125,0.22)",
+                flexShrink: 0,
               }}
             >
               AR
@@ -57,26 +72,23 @@ export default function Footer() {
                 style={{
                   fontFamily: "var(--font-syne), sans-serif",
                   fontWeight: 700,
-                  fontSize: "0.9rem",
+                  fontSize: "var(--text-base)",
                   color: "var(--fg)",
                   lineHeight: 1.2,
+                  marginBottom: 2,
                 }}
               >
                 Abror Rahmatullah
               </p>
-              <p style={{ fontSize: "0.72rem", color: "var(--fg-subtle)" }}>
-                Fullstack Developer · Backend Engineer · AI Explorer
+              <p style={{ fontSize: "var(--text-xs)", color: "var(--fg-subtle)", fontFamily: "var(--font-mono), monospace" }}>
+                Fullstack · Backend · AI Explorer
               </p>
             </div>
           </div>
 
-          {/* Social */}
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            {[
-              { href: "https://github.com/AbrorRahmatullah", icon: GithubIcon, label: "GitHub" },
-              { href: "https://www.linkedin.com/in/abrorrahmatullah/", icon: LinkedinIcon, label: "LinkedIn" },
-              { href: "mailto:rahmatullahabror@gmail.com", icon: Mail, label: "Email" },
-            ].map(({ href, icon: Icon, label }) => (
+          {/* Socials */}
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            {socials.map(({ href, icon: Icon, label }) => (
               <a
                 key={label}
                 href={href}
@@ -84,9 +96,9 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 aria-label={label}
                 style={{
-                  width: 34,
-                  height: 34,
-                  borderRadius: 7,
+                  width: 36,
+                  height: 36,
+                  borderRadius: 8,
                   background: "var(--bg-elevated)",
                   border: "1px solid var(--border)",
                   display: "flex",
@@ -94,18 +106,20 @@ export default function Footer() {
                   justifyContent: "center",
                   color: "var(--fg-muted)",
                   textDecoration: "none",
-                  transition: "all 0.2s",
+                  transition: "all 0.18s",
                 }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget;
                   el.style.borderColor = "var(--border-accent)";
                   el.style.color = "var(--accent-blue)";
+                  el.style.transform = "translateY(-2px)";
                   el.style.background = "var(--bg-card)";
                 }}
                 onMouseLeave={(e) => {
                   const el = e.currentTarget;
                   el.style.borderColor = "var(--border)";
                   el.style.color = "var(--fg-muted)";
+                  el.style.transform = "translateY(0)";
                   el.style.background = "var(--bg-elevated)";
                 }}
               >
@@ -115,40 +129,40 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Nav Links */}
+        {/* Nav */}
         <div
           style={{
             display: "flex",
             flexWrap: "wrap",
-            gap: 4,
+            gap: 2,
+            marginBottom: 24,
           }}
         >
-          {["About", "Skills", "Experience", "Projects", "GitHub", "Contact"].map((link) => (
+          {navLinks.map(({ label, href }) => (
             <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
-              onClick={(e) => {
-                e.preventDefault();
-                document
-                  .querySelector(`#${link.toLowerCase()}`)
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
+              key={label}
+              href={href}
+              onClick={(e) => handleNav(e, href)}
               style={{
                 padding: "4px 10px",
                 borderRadius: 5,
-                fontSize: "0.78rem",
+                fontSize: "var(--text-xs)",
                 color: "var(--fg-subtle)",
                 textDecoration: "none",
-                transition: "color 0.2s",
+                transition: "color 0.18s, background 0.18s",
               }}
               onMouseEnter={(e) => {
-                (e.target as HTMLAnchorElement).style.color = "var(--fg-muted)";
+                const el = e.currentTarget;
+                el.style.color = "var(--fg-muted)";
+                el.style.background = "var(--bg-elevated)";
               }}
               onMouseLeave={(e) => {
-                (e.target as HTMLAnchorElement).style.color = "var(--fg-subtle)";
+                const el = e.currentTarget;
+                el.style.color = "var(--fg-subtle)";
+                el.style.background = "transparent";
               }}
             >
-              {link}
+              {label}
             </a>
           ))}
         </div>
@@ -157,7 +171,7 @@ export default function Footer() {
         <div
           style={{
             borderTop: "1px solid var(--border)",
-            paddingTop: 16,
+            paddingTop: 18,
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -167,16 +181,16 @@ export default function Footer() {
         >
           <p
             style={{
-              fontSize: "0.72rem",
+              fontSize: "var(--text-xs)",
               color: "var(--fg-subtle)",
               fontFamily: "var(--font-mono), monospace",
             }}
           >
-            © {year} Abror Rahmatullah. Built with Next.js & Tailwind CSS.
+            © {year} Abror Rahmatullah · Built with Next.js & Tailwind CSS
           </p>
           <p
             style={{
-              fontSize: "0.72rem",
+              fontSize: "var(--text-xs)",
               color: "var(--fg-subtle)",
               fontFamily: "var(--font-mono), monospace",
             }}

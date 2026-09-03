@@ -1,8 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useInView, type Variants } from "framer-motion";
-import { ExternalLink, Code2 } from "lucide-react";
+import { motion, useInView, AnimatePresence, type Variants } from "framer-motion";
+import { ExternalLink, Code2, Database, Cpu, Globe, Link2, LayoutGrid } from "lucide-react";
 import { GithubIcon } from "./SocialIcons";
 
 type Project = {
@@ -30,7 +30,7 @@ const projects: Project[] = [
   {
     title: "SSOT Platform",
     description:
-      "Internal Single Source of Truth platform for centraliSing company documents, regulations, and procedures. Provides structured access and consistent information across all departments.",
+      "Internal Single Source of Truth platform for centralising company documents, regulations, and procedures. Provides structured access and consistent information across all departments.",
     problem: "Fragmented knowledge across teams led to inconsistencies and duplication.",
     tech: ["Python", "Flask", "SQL Server", "JavaScript"],
     category: "Enterprise App",
@@ -69,22 +69,17 @@ const projects: Project[] = [
 
 const allCategories = ["All", ...Array.from(new Set(projects.map((p) => p.category)))];
 
-const categoryColors: Record<string, string> = {
-  "Data Engineering": "var(--accent-teal)",
-  "Enterprise App": "var(--accent-blue)",
-  "AI / LLM": "#f472b6",
-  "Fullstack Web": "var(--accent-purple)",
-  "API / Integration": "#fb923c",
-};
-
-const containerVariants: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
+const categoryConfig: Record<string, { color: string; icon: React.ElementType }> = {
+  "Data Engineering": { color: "var(--accent-teal)", icon: Database },
+  "Enterprise App":  { color: "var(--accent-blue)", icon: LayoutGrid },
+  "AI / LLM":        { color: "#f472b6",            icon: Cpu },
+  "Fullstack Web":   { color: "var(--accent-purple)", icon: Globe },
+  "API / Integration": { color: "#fb923c",           icon: Link2 },
 };
 
 const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  hidden: { opacity: 0, y: 32, scale: 0.96 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.46, ease: [0.34, 1.06, 0.64, 1] } },
 };
 
 export default function Projects() {
@@ -98,16 +93,12 @@ export default function Projects() {
       : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <section
-      id="projects"
-      ref={ref}
-      style={{ padding: "100px 24px", background: "var(--bg)" }}
-    >
+    <section id="projects" ref={ref} style={{ padding: "100px 24px", background: "var(--bg)" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 22 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.48 }}
         >
           <p className="section-label">Projects</p>
           <div
@@ -116,35 +107,27 @@ export default function Projects() {
               alignItems: "flex-end",
               justifyContent: "space-between",
               flexWrap: "wrap",
-              gap: 24,
-              marginBottom: 40,
+              gap: 20,
+              marginBottom: 32,
             }}
           >
             <div>
               <h2
                 className="font-display"
-                style={{
-                  fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
-                  fontWeight: 800,
-                  letterSpacing: "-0.03em",
-                  color: "var(--fg)",
-                  lineHeight: 1.1,
-                  marginBottom: 8,
-                }}
+                style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--fg)", lineHeight: 1.1, marginBottom: 8 }}
               >
-                Featured Projects
+                Things I&apos;ve built
               </h2>
-              <p style={{ color: "var(--fg-muted)", fontSize: "0.95rem" }}>
-                Real-world applications built for enterprise environments.
+              <p style={{ color: "var(--fg-muted)", fontSize: "var(--text-base)" }}>
+                Internal tools that replaced manual processes — used daily by real teams.
               </p>
             </div>
-
             <a
               href="https://github.com/AbrorRahmatullah"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary"
-              style={{ fontSize: "0.8rem", padding: "8px 16px", gap: 6 }}
+              style={{ fontSize: "var(--text-sm)", padding: "8px 16px", gap: 6 }}
             >
               <GithubIcon size={14} />
               View GitHub
@@ -152,252 +135,208 @@ export default function Projects() {
           </div>
 
           {/* Filter Tabs */}
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 6,
-              marginBottom: 40,
-            }}
-          >
-            {allCategories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                style={{
-                  padding: "6px 14px",
-                  borderRadius: 8,
-                  fontSize: "0.8rem",
-                  fontWeight: 500,
-                  border: "1px solid",
-                  cursor: "pointer",
-                  transition: "all 0.2s",
-                  background:
-                    activeCategory === cat ? "var(--accent-blue)" : "transparent",
-                  borderColor:
-                    activeCategory === cat ? "var(--accent-blue)" : "var(--border-strong)",
-                  color: activeCategory === cat ? "white" : "var(--fg-muted)",
-                }}
-              >
-                {cat}
-              </button>
-            ))}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 40 }}>
+            {allCategories.map((cat) => {
+              const active = activeCategory === cat;
+              const cfg = cat !== "All" ? categoryConfig[cat] : null;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  style={{
+                    padding: "6px 14px",
+                    borderRadius: 8,
+                    fontSize: "var(--text-sm)",
+                    fontWeight: active ? 600 : 500,
+                    border: "1px solid",
+                    cursor: "pointer",
+                    transition: "all 0.18s",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 6,
+                    background: active ? (cfg ? cfg.color : "var(--accent-blue)") : "transparent",
+                    borderColor: active ? (cfg ? cfg.color : "var(--accent-blue)") : "var(--border-strong)",
+                    color: active ? "white" : "var(--fg-muted)",
+                    boxShadow: active ? `0 4px 12px ${cfg ? cfg.color : "var(--accent-blue)"}33` : "none",
+                  }}
+                >
+                  {cfg && !active && <cfg.icon size={11} style={{ color: cfg.color }} />}
+                  {cat}
+                </button>
+              );
+            })}
           </div>
         </motion.div>
 
+        {/* Cards Grid */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
+          layout
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
             gap: 16,
           }}
         >
-          {filtered.map((project) => {
-            const catColor = categoryColors[project.category] || "var(--accent-blue)";
-            return (
-              <motion.div
-                key={project.title}
-                variants={cardVariants}
-                layout
-                className="glass"
-                style={{
-                  borderRadius: 14,
-                  padding: "24px",
-                  display: "flex",
-                  flexDirection: "column",
-                  transition: "border-color 0.2s, box-shadow 0.2s",
-                  position: "relative",
-                  overflow: "hidden",
-                }}
-                whileHover={{
-                  y: -5,
-                  boxShadow: `0 20px 40px rgba(0,0,0,0.4), 0 0 0 1px ${catColor}25`,
-                }}
-              >
-                {/* Top accent */}
-                <div
+          <AnimatePresence mode="popLayout">
+            {filtered.map((project) => {
+              const cfg = categoryConfig[project.category] || { color: "var(--accent-blue)", icon: Code2 };
+              const CatIcon = cfg.icon;
+              return (
+                <motion.div
+                  key={project.title}
+                  variants={cardVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit={{ opacity: 0, scale: 0.94, transition: { duration: 0.18 } }}
+                  layout
+                  className="glass"
                   style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: 2,
-                    background: `linear-gradient(90deg, ${catColor}, transparent)`,
-                    opacity: project.featured ? 1 : 0.4,
-                  }}
-                />
-
-                {/* Header */}
-                <div
-                  style={{
+                    borderRadius: 14,
+                    padding: "24px",
                     display: "flex",
-                    alignItems: "flex-start",
-                    justifyContent: "space-between",
-                    marginBottom: 14,
-                    gap: 10,
+                    flexDirection: "column",
+                    position: "relative",
+                    overflow: "hidden",
+                    transition: "border-color 0.2s",
+                  }}
+                  whileHover={{
+                    y: -5,
+                    boxShadow: `0 20px 40px rgba(0,0,0,0.35), 0 0 0 1px ${cfg.color}22`,
                   }}
                 >
-                  <div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 8,
-                        marginBottom: 6,
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: 30,
-                          height: 30,
-                          borderRadius: 7,
-                          background: `${catColor}15`,
-                          border: `1px solid ${catColor}30`,
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Code2 size={13} style={{ color: catColor }} />
-                      </div>
-                      <h3
-                        className="font-display"
-                        style={{
-                          fontSize: "0.95rem",
-                          fontWeight: 700,
-                          color: "var(--fg)",
-                          letterSpacing: "-0.01em",
-                        }}
-                      >
-                        {project.title}
-                      </h3>
-                    </div>
-                    <span
-                      style={{
-                        fontSize: "0.65rem",
-                        fontFamily: "var(--font-mono), monospace",
-                        padding: "2px 8px",
-                        borderRadius: 999,
-                        background: `${catColor}12`,
-                        border: `1px solid ${catColor}28`,
-                        color: catColor,
-                        textTransform: "uppercase",
-                        letterSpacing: "0.07em",
-                      }}
-                    >
-                      {project.category}
-                    </span>
-                  </div>
+                  {/* Accent top bar */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 0, left: 0, right: 0,
+                      height: 2,
+                      background: `linear-gradient(90deg, ${cfg.color}, transparent)`,
+                      opacity: project.featured ? 1 : 0.45,
+                    }}
+                  />
 
-                  {/* Links */}
-                  <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        width: 30,
-                        height: 30,
-                        borderRadius: 7,
-                        background: "var(--bg-elevated)",
-                        border: "1px solid var(--border)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "var(--fg-muted)",
-                        transition: "all 0.2s",
-                      }}
-                      onMouseEnter={(e) => {
-                        const el = e.currentTarget;
-                        el.style.color = "var(--fg)";
-                        el.style.borderColor = "var(--border-accent)";
-                      }}
-                      onMouseLeave={(e) => {
-                        const el = e.currentTarget;
-                        el.style.color = "var(--fg-muted)";
-                        el.style.borderColor = "var(--border)";
-                      }}
-                    >
-                      <GithubIcon size={13} />
-                    </a>
-                    {project.demo && (
+                  {/* Header */}
+                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 14, gap: 10 }}>
+                    <div>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+                        <div
+                          style={{
+                            width: 32,
+                            height: 32,
+                            borderRadius: 8,
+                            background: `${cfg.color}15`,
+                            border: `1px solid ${cfg.color}28`,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <CatIcon size={14} style={{ color: cfg.color }} />
+                        </div>
+                        <h3
+                          className="font-display"
+                          style={{ fontSize: "var(--text-base)", fontWeight: 700, color: "var(--fg)", letterSpacing: "-0.01em" }}
+                        >
+                          {project.title}
+                        </h3>
+                      </div>
+                      <span
+                        style={{
+                          fontSize: "var(--text-2xs)",
+                          fontFamily: "var(--font-mono), monospace",
+                          padding: "2px 8px",
+                          borderRadius: 999,
+                          background: `${cfg.color}12`,
+                          border: `1px solid ${cfg.color}28`,
+                          color: cfg.color,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.07em",
+                        }}
+                      >
+                        {project.category}
+                      </span>
+                    </div>
+                    <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
                       <a
-                        href={project.demo}
+                        href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`View ${project.title} on GitHub`}
                         style={{
-                          width: 30,
-                          height: 30,
-                          borderRadius: 7,
+                          width: 30, height: 30, borderRadius: 7,
                           background: "var(--bg-elevated)",
                           border: "1px solid var(--border)",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
+                          display: "flex", alignItems: "center", justifyContent: "center",
                           color: "var(--fg-muted)",
-                          transition: "all 0.2s",
+                          transition: "all 0.18s",
+                        }}
+                        onMouseEnter={(e) => {
+                          const el = e.currentTarget;
+                          el.style.color = "var(--fg)";
+                          el.style.borderColor = "var(--border-accent)";
+                        }}
+                        onMouseLeave={(e) => {
+                          const el = e.currentTarget;
+                          el.style.color = "var(--fg-muted)";
+                          el.style.borderColor = "var(--border)";
                         }}
                       >
-                        <ExternalLink size={13} />
+                        <GithubIcon size={13} />
                       </a>
-                    )}
+                      {project.demo && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`View ${project.title} live demo`}
+                          style={{
+                            width: 30, height: 30, borderRadius: 7,
+                            background: "var(--bg-elevated)",
+                            border: "1px solid var(--border)",
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                            color: "var(--fg-muted)",
+                            transition: "all 0.18s",
+                          }}
+                        >
+                          <ExternalLink size={13} />
+                        </a>
+                      )}
+                    </div>
                   </div>
-                </div>
 
-                {/* Description */}
-                <p
-                  style={{
-                    fontSize: "0.82rem",
-                    color: "var(--fg-muted)",
-                    lineHeight: 1.65,
-                    marginBottom: 14,
-                    flexGrow: 1,
-                  }}
-                >
-                  {project.description}
-                </p>
+                  {/* Description */}
+                  <p style={{ fontSize: "var(--text-sm)", color: "var(--fg-muted)", lineHeight: 1.65, marginBottom: 14, flexGrow: 1 }}>
+                    {project.description}
+                  </p>
 
-                {/* Problem solved */}
-                <div
-                  style={{
-                    padding: "10px 12px",
-                    borderRadius: 8,
-                    background: "var(--bg-elevated)",
-                    border: "1px solid var(--border)",
-                    marginBottom: 14,
-                  }}
-                >
-                  <p
+                  {/* Problem */}
+                  <div
                     style={{
-                      fontSize: "0.65rem",
-                      color: "var(--fg-subtle)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.1em",
-                      fontFamily: "var(--font-mono), monospace",
-                      marginBottom: 4,
+                      padding: "10px 12px",
+                      borderRadius: 8,
+                      background: "var(--bg-elevated)",
+                      border: `1px solid ${cfg.color}18`,
+                      marginBottom: 14,
                     }}
                   >
-                    Problem Solved
-                  </p>
-                  <p style={{ fontSize: "0.78rem", color: "var(--fg-muted)", lineHeight: 1.5 }}>
-                    {project.problem}
-                  </p>
-                </div>
+                    <p style={{ fontSize: "var(--text-2xs)", color: cfg.color, textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "var(--font-mono), monospace", marginBottom: 4 }}>
+                      Problem Solved
+                    </p>
+                    <p style={{ fontSize: "var(--text-xs)", color: "var(--fg-muted)", lineHeight: 1.5 }}>
+                      {project.problem}
+                    </p>
+                  </div>
 
-                {/* Tech Stack */}
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-                  {project.tech.map((t) => (
-                    <span key={t} className="tech-badge">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            );
-          })}
+                  {/* Tech */}
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+                    {project.tech.map((t) => (
+                      <span key={t} className="tech-badge">{t}</span>
+                    ))}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
         </motion.div>
       </div>
     </section>

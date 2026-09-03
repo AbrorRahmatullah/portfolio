@@ -32,7 +32,7 @@ export default function ScrollProgress() {
         style={{
           height: "100%",
           width: `${progress}%`,
-          background: "linear-gradient(90deg, var(--accent-blue), var(--accent-purple))",
+          background: "var(--accent-blue)",
           transition: "width 0.1s linear",
         }}
       />

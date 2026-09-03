@@ -127,12 +127,12 @@ const skillGroups: SkillGroup[] = [
 
 const containerVariants: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.07 } },
+  visible: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
 };
 
 const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  hidden: { opacity: 0, y: 20, scale: 0.97 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.44, ease: [0.34, 1.06, 0.64, 1] } },
 };
 
 function SkillBar({ name, level, color, delay }: Skill & { color: string; delay: number }) {
@@ -140,20 +140,14 @@ function SkillBar({ name, level, color, delay }: Skill & { color: string; delay:
   const inView = useInView(ref, { once: true, margin: "-40px" });
 
   return (
-    <div ref={ref} style={{ marginBottom: 10 }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginBottom: 5,
-        }}
-      >
-        <span style={{ fontSize: "0.8rem", color: "var(--fg-muted)", fontWeight: 500 }}>
+    <div ref={ref} style={{ marginBottom: 11 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
+        <span style={{ fontSize: "var(--text-sm)", color: "var(--fg-muted)", fontWeight: 500 }}>
           {name}
         </span>
         <span
           style={{
-            fontSize: "0.7rem",
+            fontSize: "var(--text-xs)",
             color: "var(--fg-subtle)",
             fontFamily: "var(--font-mono), monospace",
           }}
@@ -163,7 +157,7 @@ function SkillBar({ name, level, color, delay }: Skill & { color: string; delay:
       </div>
       <div
         style={{
-          height: 3,
+          height: 4,
           borderRadius: 999,
           background: "var(--bg-elevated)",
           overflow: "hidden",
@@ -172,11 +166,12 @@ function SkillBar({ name, level, color, delay }: Skill & { color: string; delay:
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: inView ? `${level}%` : 0 }}
-          transition={{ duration: 0.9, delay }}
+          transition={{ duration: 1.0, delay, ease: [0.4, 0, 0.2, 1] }}
           style={{
             height: "100%",
             borderRadius: 999,
             background: `linear-gradient(90deg, ${color}, ${color}88)`,
+            boxShadow: `0 0 8px ${color}55`,
           }}
         />
       </div>
@@ -189,16 +184,12 @@ export default function Skills() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section
-      id="skills"
-      ref={ref}
-      style={{ padding: "100px 24px", background: "var(--bg)" }}
-    >
+    <section id="skills" ref={ref} style={{ padding: "100px 24px", background: "var(--bg)" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 22 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.48 }}
         >
           <p className="section-label">Skills</p>
           <h2
@@ -208,22 +199,14 @@ export default function Skills() {
               fontWeight: 800,
               letterSpacing: "-0.03em",
               color: "var(--fg)",
-              marginBottom: 12,
+              marginBottom: 10,
               lineHeight: 1.1,
             }}
           >
-            Technical Proficiency
+            Tools I reach for
           </h2>
-          <p
-            style={{
-              color: "var(--fg-muted)",
-              fontSize: "0.95rem",
-              marginBottom: 56,
-              maxWidth: 500,
-            }}
-          >
-            A full-stack skill set built across enterprise projects, data systems, and
-            API development over 4+ years.
+          <p style={{ color: "var(--fg-muted)", fontSize: "var(--text-base)", marginBottom: 52, maxWidth: 500 }}>
+            Four years of backend-heavy work, three databases, two ERP systems, one RAG pipeline — here&apos;s what I actually use.
           </p>
         </motion.div>
 
@@ -244,12 +227,12 @@ export default function Skills() {
                 key={group.id}
                 variants={cardVariants}
                 className="glass"
-                style={{
-                  borderRadius: 14,
-                  padding: "24px",
-                  transition: "border-color 0.2s",
+                style={{ borderRadius: 14, padding: "24px", transition: "border-color 0.2s, box-shadow 0.2s" }}
+                whileHover={{
+                  y: -4,
+                  borderColor: `${group.color}35`,
+                  boxShadow: `0 12px 32px ${group.color}12, var(--shadow-card)`,
                 }}
-                whileHover={{ y: -3 }}
               >
                 {/* Card Header */}
                 <div
@@ -257,17 +240,17 @@ export default function Skills() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    marginBottom: 20,
+                    marginBottom: 18,
                   }}
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                     <div
                       style={{
-                        width: 32,
-                        height: 32,
-                        borderRadius: 8,
-                        background: `${group.color}18`,
-                        border: `1px solid ${group.color}30`,
+                        width: 34,
+                        height: 34,
+                        borderRadius: 9,
+                        background: `${group.color}15`,
+                        border: `1px solid ${group.color}28`,
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
@@ -277,12 +260,7 @@ export default function Skills() {
                     </div>
                     <span
                       className="font-display"
-                      style={{
-                        fontSize: "0.85rem",
-                        fontWeight: 700,
-                        color: "var(--fg)",
-                        letterSpacing: "-0.01em",
-                      }}
+                      style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--fg)", letterSpacing: "-0.01em" }}
                     >
                       {group.label}
                     </span>
@@ -290,7 +268,7 @@ export default function Skills() {
                   {group.badge && (
                     <span
                       style={{
-                        fontSize: "0.6rem",
+                        fontSize: "0.58rem",
                         fontFamily: "var(--font-mono), monospace",
                         padding: "2px 8px",
                         borderRadius: 999,
@@ -309,12 +287,7 @@ export default function Skills() {
                 {/* Skill Bars */}
                 <div>
                   {group.skills.map((skill, i) => (
-                    <SkillBar
-                      key={skill.name}
-                      {...skill}
-                      color={group.color}
-                      delay={i * 0.06}
-                    />
+                    <SkillBar key={skill.name} {...skill} color={group.color} delay={i * 0.06} />
                   ))}
                 </div>
               </motion.div>
